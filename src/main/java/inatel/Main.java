@@ -1,35 +1,36 @@
 package inatel;
 
-import inatel.excecoes.checked.NotaInsuficiente;
-import inatel.excecoes.unchecked.ProjetoJaExistente;
+import inatel.exception.checked.NotaInsuficiente;
+import inatel.exception.uncheked.ProjetoJaExistente;
 import inatel.projeto.Fetin;
 
 public class Main {
     public static void main(String[]args)
     {
-        Fetin f1 = new Fetin();
-        Fetin f2 = new Fetin();
-        Fetin f3 = new Fetin();
-        Fetin f4 = new Fetin();
+        Fetin[] projetos = new Fetin[4];
+        projetos[0] = new Fetin();
+        projetos[1] = new Fetin();
+        projetos[2] = new Fetin();
+        projetos[3] = new Fetin();
 
-
-        //tratamento exceções:
+        
         try
         {
-            f1.map("Semáforo Inteligente",70d);
-            f2.map("InaTíbia", 100d);
-            f3.map("Próteses", 40d);
-            f4.map("IA para deficientes", 70d);
+            projetos[0].map("Semáforo Inteligente",70d);
+            projetos[1].map("InaTíbia",100d);
+            projetos[2].map("Proteses",40d);
+            projetos[3].map("InaTibia",70d);
         }
-        catch (NotaInsuficiente | ProjetoJaExistente e)
+
+        catch(NotaInsuficiente | ProjetoJaExistente e)
         {
             e.printStackTrace();
-
         }
 
-        f1.mostraInfo();
-        f2.mostraInfo();
-        f3.mostraInfo();
-        f4.mostraInfo();
+        for(int i = 0; i < projetos.length; i++)
+        {
+            projetos[i].mostraInfo();
+        }
+
     }
 }
