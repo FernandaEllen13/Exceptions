@@ -1,6 +1,6 @@
 package inatel.projeto;
-import inatel.excecoes.checked.NotaInsuficiente;
-import inatel.excecoes.unchecked.ProjetoJaExistente;
+import inatel.exception.checked.NotaInsuficiente;
+import inatel.exception.uncheked.ProjetoJaExistente;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,17 +12,30 @@ public class Fetin
     String nome_projeto;
     double nota_projeto;
 
+    public void projeto(String nome_projeto, double nota_projeto)
+    {
+
+    }
+
+
     //lista:
     List<String> Aux_nome = new ArrayList<>();
 
     //HashMap:
     Map<String,Double> map = new HashMap<String,Double>();
 
-    public void map(String nome_projeto, double nota_projeto) throws NotaInsuficiente {
-        if (nota_projeto > 60) {
+    public void map(String nome_projeto, double nota_projeto) throws NotaInsuficiente,ProjetoJaExistente {
+        if ((nota_projeto > 60) || (map.containsKey(nome_projeto)) )
+        {
             map.put(nome_projeto, nota_projeto);
-        } else {
+        }
+        else if(nota_projeto < 60)
+        {
             throw new NotaInsuficiente("Nota Insuficiente!");
+        }
+
+        else {
+            throw new ProjetoJaExistente("Projeto ja existente!");
         }
 
     }
@@ -48,6 +61,3 @@ public class Fetin
     }
 
 }
-
-
-
